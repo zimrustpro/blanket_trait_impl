@@ -23,6 +23,7 @@ impl<T,E: StdError> ToSystemError<T> for Result<T, E> {
 fn parse_then_send(input: &[u8]) -> Result<(), SystemError> {
     let some_str = std::str::from_utf8(input).to_system_error()?;
     let number = some_str.parse::<i32>().to_system_error()?;
+    send_number(number).to_system_error()?;
     Ok(())
 }
 
